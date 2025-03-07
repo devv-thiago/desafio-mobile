@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/data/services/movie_service.dart';
 import 'package:movie_app/ui/homepage/homepage.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(
     MaterialApp(
       home: Scaffold(
@@ -10,8 +11,6 @@ void main() {
       ),
     ),
   );
-  MovieService movieService = MovieService();
-  movieService.example();
 }
 
 class MyApp extends StatelessWidget {
@@ -24,7 +23,7 @@ class MyApp extends StatelessWidget {
         padding: EdgeInsets.only(
           left: deviceInfo.width * 0.05,
           right: deviceInfo.width * 0.05,
-          top: deviceInfo.width * 0.05,
+          top: deviceInfo.width * 0.1,
         ),
         color: Color.fromRGBO(31, 31, 31, 1),
         height: deviceInfo.height,
