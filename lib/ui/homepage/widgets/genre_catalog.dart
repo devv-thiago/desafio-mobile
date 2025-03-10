@@ -16,7 +16,7 @@ class GenresCatalog extends StatelessWidget {
           spacing: 10,
           children: [
             Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: EdgeInsets.only(left: height * 0.05),
               alignment: Alignment.centerLeft,
               height: height * 0.2,
               child: Text(
@@ -29,7 +29,7 @@ class GenresCatalog extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: height * 0.75,
+              height: height * 0.25,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: genres.length,

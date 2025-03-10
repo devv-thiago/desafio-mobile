@@ -21,8 +21,6 @@ class MyApp extends StatelessWidget {
     Size deviceInfo = MediaQuery.of(context).size;
     return Container(
         padding: EdgeInsets.only(
-          left: deviceInfo.width * 0.05,
-          right: deviceInfo.width * 0.05,
           top: deviceInfo.width * 0.1,
         ),
         color: Color.fromRGBO(31, 31, 31, 1),

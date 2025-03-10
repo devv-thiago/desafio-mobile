@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 
 class MovieMiniature extends StatelessWidget {
@@ -27,12 +26,15 @@ class MovieMiniature extends StatelessWidget {
       width: width,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Color.fromRGBO(
-          Random().nextInt(256),
-          Random().nextInt(256),
-          Random().nextInt(256),
-          1,
+        gradient: LinearGradient(
+          colors: [
+            Colors.blue[200]!,
+            Colors.blue[500]!,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
+        color: Colors.blue[200],
         borderRadius: BorderRadius.circular(15),
       ),
       child: Text(
@@ -41,7 +43,7 @@ class MovieMiniature extends StatelessWidget {
           color: Colors.white,
           fontWeight: FontWeight.bold,
           fontStyle: FontStyle.italic,
-          fontSize: 20,
+          fontSize: 18,
         ),
       ),
     );
