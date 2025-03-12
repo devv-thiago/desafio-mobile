@@ -32,15 +32,7 @@ class MovieMiniature extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.white, width: 1),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.blue[200]!,
-                  Colors.blue[500]!,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-              color: Colors.blue[200],
+              color: Colors.blue[400],
               borderRadius: BorderRadius.circular(15),
             ),
             child: Text(
