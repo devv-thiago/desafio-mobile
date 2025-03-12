@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/data/services/movie_service.dart';
+import 'package:movie_app/domain/models/catalog.dart';
 import 'package:movie_app/domain/models/genre.dart';
 import 'package:movie_app/ui/homepage/widgets/genre_catalog.dart';
+import 'package:movie_app/ui/homepage/widgets/upcoming_catalog.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -18,32 +20,24 @@ class _HomepageState extends State<Homepage> {
     Size deviceInfo = MediaQuery.of(context).size;
 
     return Column(
-      spacing: deviceInfo.height * 0.03,
       children: [
         Padding(
           padding: EdgeInsets.only(
-            left: deviceInfo.width * 0.05,
-            right: deviceInfo.width * 0.05,
+            left: deviceInfo.width * 0.02,
+            right: deviceInfo.width * 0.02,
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                child: SearchBar(
-                  backgroundColor: WidgetStateProperty.all(Colors.white),
-                  hintText: 'Pesquisar por títulos',
-                ),
-              ),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.favorite_border,
-                  size: 30,
-                  color: Colors.red,
-                ),
-              ),
-            ],
+          child: SearchBar(
+            padding: WidgetStateProperty.all(EdgeInsets.only(
+              left: deviceInfo.width * 0.05,
+              right: deviceInfo.width * 0.05,
+            )),
+            trailing: [Icon(Icons.search)],
+            backgroundColor: WidgetStateProperty.all(Colors.white),
+            hintText: 'Pesquise seu título favorito',
           ),
+        ),
+        SizedBox(
+          height: deviceInfo.height * 0.02,
         ),
         FutureBuilder<List<Genre>>(
           future: _movieService.getGenres(),
@@ -52,34 +46,43 @@ class _HomepageState extends State<Homepage> {
               return CircularProgressIndicator();
             }
             if (snapshot.hasError) {
-              return Text('Erro: ${snapshot.error}');
+              return Text('Erro: ${snapshot.error}',
+                  style: TextStyle(color: Colors.amber));
             }
             if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Text('Nenhum gênero encontrado');
+              return Text('Nenhum gênero encontrado',
+                  style: TextStyle(color: Colors.amber));
             }
 
             return GenresCatalog(
               snapshot.data!,
-              height: deviceInfo.height * 0.3,
+              height: deviceInfo.height * 0.15,
             );
           },
         ),
-        FutureBuilder<List<Genre>>(
-          future: _movieService.getGenres(),
+        SizedBox(
+          height: deviceInfo.height * 0.036,
+        ),
+        FutureBuilder<Catalog>(
+          future: _movieService.getUpcomingMovies(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
             }
             if (snapshot.hasError) {
-              return Text('Erro: ${snapshot.error}');
+              return Text('Erro: ${snapshot.error}',
+                  style: TextStyle(color: Colors.amber));
             }
-            if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Text('Nenhum gênero encontrado');
+            if (!snapshot.hasData) {
+              return Text(
+                'Nenhum filme encontrado',
+                style: TextStyle(color: Colors.amber),
+              );
             }
 
-            return GenresCatalog(
+            return UpcomingCatalog(
+              deviceInfo.height * 0.68,
               snapshot.data!,
-              height: deviceInfo.height * 0.3,
             );
           },
         ),

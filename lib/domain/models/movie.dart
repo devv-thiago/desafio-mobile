@@ -1,10 +1,25 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class Movie {
-   String name;
-  Movie(this.name);
+  int id;
+  bool isAdult;
+  String poster, synopsis, title, releaseDate;
+  List<dynamic> genres;
+  double evaluation;
+
+  Movie(this.id, this.isAdult, this.poster, this.genres, this.synopsis,
+      this.releaseDate, this.title, this.evaluation);
 
   factory Movie.fromJson(Map<String, dynamic> json) {
     return Movie(
-      json['name'],
+      json['id'],
+      json['adult'],
+      dotenv.env['POSTER_BASEURL'].toString() + json['poster_path'],
+      json['genre_ids'],
+      json['overview'],
+      json['release_date'],
+      json['title'],
+      json['vote_average'],
     );
   }
 }

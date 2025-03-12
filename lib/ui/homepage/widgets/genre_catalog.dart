@@ -13,12 +13,12 @@ class GenresCatalog extends StatelessWidget {
     return SizedBox(
         height: height,
         child: Column(
-          spacing: 10,
+          spacing: 20,
           children: [
             Container(
-              padding: EdgeInsets.only(left: height * 0.05),
+              padding: EdgeInsets.only(left: height * 0.1),
               alignment: Alignment.centerLeft,
-              height: height * 0.2,
+              height: height * 0.25,
               child: Text(
                 'Gêneros',
                 style: TextStyle(
@@ -29,12 +29,12 @@ class GenresCatalog extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: height * 0.25,
+              height: height * 0.5,
               child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: genres.length,
                   itemBuilder: (context, index) => MovieMiniature.title(
-                      width: height * 0.6, movieTitle: genres[index].name)),
+                      width: height, movieTitle: genres[index].name)),
             )
           ],
         ));
