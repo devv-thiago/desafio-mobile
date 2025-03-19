@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/data/controllers/movie_controller.dart';
-import 'package:movie_app/ui/homepage/widgets/genre_catalog.dart';
+import 'package:movie_app/ui/homepage/widgets/genre_list.dart';
 import 'package:movie_app/ui/homepage/widgets/upcoming_catalog.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +16,7 @@ class Homepage extends StatelessWidget {
       child: Consumer<MovieController>(
         builder: (context, movieController, child) {
           return Column(
+            spacing: deviceInfo.height * 0.02,
             children: [
               Padding(
                 padding:
@@ -29,18 +30,16 @@ class Homepage extends StatelessWidget {
                   hintText: 'Pesquise seu título favorito',
                 ),
               ),
-              SizedBox(height: deviceInfo.height * 0.02),
               (movieController.isLoading && movieController.genres.isEmpty)
                   ? CircularProgressIndicator()
                   : (movieController.errorMessage.isNotEmpty &&
                           movieController.genres.isEmpty)
                       ? Text(movieController.errorMessage,
                           style: TextStyle(color: Colors.red))
-                      : GenresCatalog(
-                          movieController.genres,
-                          height: deviceInfo.height * 0.15,
+                      : GenresList(
+                          deviceInfo: deviceInfo,
+                          genres: movieController.genres,
                         ),
-              SizedBox(height: deviceInfo.height * 0.02),
               (movieController.isLoading &&
                       movieController.catalog.movies.isEmpty)
                   ? CircularProgressIndicator()
@@ -49,8 +48,8 @@ class Homepage extends StatelessWidget {
                       ? Text(movieController.errorMessage,
                           style: TextStyle(color: Colors.red))
                       : UpcomingCatalog(
-                          deviceInfo.height * 0.68,
-                          movieController.catalog,
+                          deviceInfo: deviceInfo,
+                          catalog: movieController.catalog,
                         ),
             ],
           );

@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_app/ui/core/colors.dart';
+import 'package:movie_app/ui/core/fonts.dart';
 
 class MovieMiniature extends StatelessWidget {
   final String movieTitle, image, releaseDate;
-  final double width;
+  final Size deviceInfo;
 
-  const MovieMiniature.title({
-    this.releaseDate = '',
-    required this.width,
-    required this.movieTitle,
-    super.key,
-  }) : image = '';
-
-  const MovieMiniature.image({
-    required this.width,
+  const MovieMiniature({
+    required this.deviceInfo,
     required this.releaseDate,
     required this.image,
     super.key,
@@ -22,73 +17,46 @@ class MovieMiniature extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return movieTitle.isNotEmpty
-        ? Container(
-            margin: EdgeInsets.only(
-              right: 10,
-              left: 10,
+    return Container(
+      decoration: BoxDecoration(),
+      width: deviceInfo.width,
+      child: Column(
+        children: [
+          SizedBox(
+            height: 250,
+            child: Image.network(
+              fit: BoxFit.fill,
+              image,
+              headers: {
+                "accept": "application/json",
+                "Authorization": "Bearer ${dotenv.env['API_KEY']}"
+              },
+              errorBuilder: (context, widget, stack) {
+                return SizedBox(
+                  child: Center(
+                    child: Text(
+                      'No Poster',
+                      style: AppFontStyle.lightLarge,
+                    ),
+                  ),
+                );
+              },
             ),
-            width: width,
+          ),
+          Container(
             alignment: Alignment.center,
+            width: deviceInfo.width,
+            height: 30,
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.white, width: 1),
-              color: Colors.blue[400],
-              borderRadius: BorderRadius.circular(15),
-            ),
+                color: Colors.transparent,
+                border: Border.all(color: AppColors.color1, width: 1)),
             child: Text(
-              movieTitle,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontStyle: FontStyle.italic,
-                fontSize: 18,
-              ),
+              DateFormat('dd/MM/yyyy').format(DateTime.parse(releaseDate)),
+              style: AppFontStyle.lightMedium,
             ),
           )
-        : Container(
-            decoration: BoxDecoration(),
-            width: width,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 250,
-                  child: Image.network(
-                    fit: BoxFit.fill,
-                    image,
-                    headers: {
-                      "accept": "application/json",
-                      "Authorization": "Bearer ${dotenv.env['API_KEY']}"
-                    },
-                    errorBuilder: (context, widget, stack) {
-                      return SizedBox(
-                        child: Center(
-                          child: Text(
-                            'No Poster',
-                            style: TextStyle(
-                              color: Color.fromRGBO(255, 255, 255, 1),
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  width: width,
-                  height: 30,
-                  decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.white, width: 1)),
-                  child: Text(
-                    DateFormat('dd/MM/yyyy')
-                        .format(DateTime.parse(releaseDate)),
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                )
-              ],
-            ),
-          );
+        ],
+      ),
+    );
   }
 }
