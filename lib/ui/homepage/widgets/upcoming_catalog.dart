@@ -27,8 +27,7 @@ class UpcomingCatalog extends StatelessWidget {
           ),
           itemCount: catalog.movies.length,
           itemBuilder: (context, index) => MovieMiniature(
-            releaseDate: catalog.movies[index].releaseDate,
-            image: catalog.movies[index].poster,
+            movie: catalog.movies[index],
             deviceInfo: deviceInfo,
           ),
         ),
