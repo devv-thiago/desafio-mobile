@@ -19,7 +19,7 @@ class MovieMiniature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.goNamed('/movie_detail'),
+      onTap: () => context.goNamed('/movie_detail',extra: movie),
       child: Container(
         decoration: BoxDecoration(),
         width: deviceInfo.width,
