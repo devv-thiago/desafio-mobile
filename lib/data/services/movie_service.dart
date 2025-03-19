@@ -24,6 +24,7 @@ class MovieService {
   }
 
   Future<Catalog> getUpcomingMovies() async {
+    Catalog? catalog;
     try {
       http.Response response = await http.get(
           Uri.parse(
@@ -33,7 +34,7 @@ class MovieService {
             "Authorization": "Bearer ${dotenv.env['API_KEY']}"
           });
       final Map<String, dynamic> json = jsonDecode(response.body);
-      Catalog catalog = Catalog(
+      catalog = Catalog(
           json['page'],
           (json['results'] as List)
               .map((movie) => Movie.fromJson(movie))

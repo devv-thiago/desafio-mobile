@@ -52,10 +52,26 @@ class MovieMiniature extends StatelessWidget {
               children: [
                 SizedBox(
                   height: 250,
-                  child: Image.network(fit: BoxFit.fill, image, headers: {
-                    "accept": "application/json",
-                    "Authorization": "Bearer ${dotenv.env['API_KEY']}"
-                  }),
+                  child: Image.network(
+                    fit: BoxFit.fill,
+                    image,
+                    headers: {
+                      "accept": "application/json",
+                      "Authorization": "Bearer ${dotenv.env['API_KEY']}"
+                    },
+                    errorBuilder: (context, widget, stack) {
+                      return SizedBox(
+                        child: Center(
+                          child: Text(
+                            'No Poster',
+                            style: TextStyle(
+                              color: Color.fromRGBO(255, 255, 255, 1),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
                 ),
                 Container(
                   alignment: Alignment.center,
