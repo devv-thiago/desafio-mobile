@@ -3,7 +3,8 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class Movie {
   int id;
   bool isAdult;
-  String poster = 'No poster',
+  String backdrop = 'No backdrop',
+      poster = 'No poster',
       synopsis = 'No synopsis',
       title = 'No title',
       releaseDate = '2099-12-31';
@@ -13,6 +14,7 @@ class Movie {
   Movie(
     this.id,
     this.isAdult,
+    this.backdrop,
     this.poster,
     this.genres,
     this.synopsis,
@@ -25,6 +27,7 @@ class Movie {
     return Movie(
       json['id'],
       json['adult'],
+      dotenv.env['POSTER_BASEURL'].toString() + (json['backdrop_path'] ?? ''),
       dotenv.env['POSTER_BASEURL'].toString() + (json['poster_path'] ?? ''),
       json['genre_ids'],
       json['overview'],
