@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/data/controllers/genre_controller.dart';
+import 'package:movie_app/data/controllers/movie_controller.dart';
 import 'package:movie_app/domain/models/movie.dart';
 import 'package:movie_app/ui/core/colors.dart';
 import 'package:movie_app/ui/core/fonts.dart';
 import 'package:movie_app/ui/core/widgets/genre_list.dart';
+import 'package:movie_app/ui/movie_detail/widgets/cast_list.dart';
 import 'package:provider/provider.dart';
 
 class MovieDetail extends StatelessWidget {
+  final MovieController _movieController = MovieController();
+
   final Movie movie;
-  const MovieDetail({
+  MovieDetail({
     required this.movie,
     super.key,
   });
@@ -64,17 +68,20 @@ class MovieDetail extends StatelessWidget {
                           Row(
                             spacing: 10,
                             children: [
-                              Text(
-                                movie.title,
-                                style: AppFontStyle.lightTitle,
+                              SizedBox(
+                                width: deviceInfo.width * 0.4,
+                                child: Text(
+                                  movie.title,
+                                  style: AppFontStyle.lightTitle,
+                                ),
                               ),
                               Text(
                                 " | ",
                                 style: AppFontStyle.lightTitle,
                               ),
                               Text(
-                                DateFormat('yyyy').format(
-                                    DateTime.parse(movie.releaseDate)),
+                                DateFormat('yyyy')
+                                    .format(DateTime.parse(movie.releaseDate)),
                                 style: AppFontStyle.lightTitle,
                               ),
                             ],
@@ -116,22 +123,51 @@ class MovieDetail extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: deviceInfo.width * 0.04),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: deviceInfo.width * 0.04),
                   child: Divider(
                     height: deviceInfo.height * 0.05,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: deviceInfo.width * 0.04),
-                  child: Text(
-                    softWrap: true,
-                    textAlign: TextAlign.justify,
-                    movie.synopsis,
-                    style: AppFontStyle.lightLarge,
+                  padding:
+                      EdgeInsets.symmetric(horizontal: deviceInfo.width * 0.04),
+                  child: SizedBox(
+                    height: deviceInfo.height * 0.28,
+                    child: SingleChildScrollView(
+                      child: Text(
+                        softWrap: true,
+                        textAlign: TextAlign.justify,
+                        movie.synopsis,
+                        style: AppFontStyle.lightLarge,
+                      ),
+                    ),
                   ),
                 ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: deviceInfo.width * 0.04),
+                  child: Divider(
+                    height: deviceInfo.height * 0.01,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 10, top: 10),
+                  child: Text(
+                    "Elenco",
+                    style: AppFontStyle.lightTitle,
+                  ),
+                ),
+                FutureBuilder(
+                    future: _movieController.fetchMovieCast(movie.id),
+                    builder: (context, snapshot) {
+                      return (snapshot.connectionState != ConnectionState.none)
+                          ? CastList(
+                              cast: _movieController.cast,
+                              deviceInfo: deviceInfo,
+                            )
+                          : CircularProgressIndicator(color: AppColors.color2);
+                    })
               ],
             ),
           ),
