@@ -40,6 +40,16 @@ class MovieDetail extends StatelessWidget {
                       height: 250,
                       width: deviceInfo.width,
                       child: Image.network(
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent? loadingProgress) {
+                          if (loadingProgress == null) return child;
+
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: AppColors.color2,
+                            ),
+                          );
+                        },
                         fit: BoxFit.fill,
                         movie.backdrop,
                         headers: {
@@ -161,7 +171,7 @@ class MovieDetail extends StatelessWidget {
                 FutureBuilder(
                     future: _movieController.fetchMovieCast(movie.id),
                     builder: (context, snapshot) {
-                      return (snapshot.connectionState != ConnectionState.none)
+                      return (snapshot.connectionState == ConnectionState.done)
                           ? CastList(
                               cast: _movieController.cast,
                               deviceInfo: deviceInfo,

@@ -36,11 +36,17 @@ class MovieService {
             "Authorization": "Bearer ${dotenv.env['API_KEY']}"
           });
       final Map<String, dynamic> json = jsonDecode(response.body);
-
-      return Cast(
+      Cast noFilteredCast = Cast(
           movieCast: (json['cast'] as List)
               .map((person) => Person.fromJson(person))
               .toList());
+      return Cast(
+        movieCast: noFilteredCast.movieCast
+            .where((e) =>
+               
+                e.profile != dotenv.env['BACKDROP_BASEURL'])
+            .toList(),
+      );
     } catch (e) {
       throw Exception('Erro getCast: $e');
     }
