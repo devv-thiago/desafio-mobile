@@ -24,6 +24,7 @@ class GenreController extends ChangeNotifier{
       _genres = await _genreService.getGenres();
     } catch (e) {
       _errorMessage = 'Erro interno do aplicativo, contate a equipe de suporte!';
+      throw Exception('Erro fetchGenres: $e');
     }
 
     _isLoading = false;
