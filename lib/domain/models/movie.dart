@@ -27,7 +27,7 @@ class Movie {
     return Movie(
       json['id'],
       json['adult'],
-      dotenv.env['POSTER_BASEURL'].toString() + (json['backdrop_path'] ?? ''),
+      dotenv.env['BACKDROP_BASEURL'].toString() + (json['backdrop_path'] ?? ''),
       dotenv.env['POSTER_BASEURL'].toString() + (json['poster_path'] ?? ''),
       json['genre_ids'],
       json['overview'],

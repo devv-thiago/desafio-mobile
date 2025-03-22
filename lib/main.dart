@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/data/controllers/genre_controller.dart';
+import 'package:movie_app/data/controllers/movie_controller.dart';
 import 'package:movie_app/routes/app_routes.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   await dotenv.load(fileName: ".env");
   runApp(
-    MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GenreController>(create: (context) => GenreController()),
+        ChangeNotifierProvider<MovieController>(create: (context) => MovieController()),
+      ],
+      child: MyApp()),
   );
 }
 

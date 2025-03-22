@@ -16,8 +16,8 @@ class GenreButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(
-        right: 10,
-        left: 10,
+        right: deviceInfo.width * 0.02,
+        left: deviceInfo.width * 0.02,
       ),
       width: deviceInfo.width * 0.3,
       alignment: Alignment.center,
@@ -27,8 +27,12 @@ class GenreButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Text(
+        textAlign: TextAlign.center,
+        softWrap: true,
         genreTitle,
-        style: AppFontStyle.lightLarge,
+        style: (genreTitle.length < 9)
+            ? AppFontStyle.lightLarge
+            : AppFontStyle.lightMedium,
       ),
     );
   }

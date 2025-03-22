@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/models/genre.dart';
 import 'package:movie_app/ui/core/fonts.dart';
-import 'package:movie_app/ui/homepage/widgets/genre_button.dart';
+import 'package:movie_app/ui/core/widgets/genre_button.dart';
 
 class GenresList extends StatelessWidget {
+  final bool viewTitle;
   final Size deviceInfo;
   final List<Genre> genres;
 
   const GenresList({
+    required this.viewTitle,
     required this.genres,
     required this.deviceInfo,
     super.key,
@@ -21,13 +23,15 @@ class GenresList extends StatelessWidget {
         spacing: deviceInfo.height * 0.01,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: deviceInfo.width * 0.05),
-            child: Text(
-              'Gêneros',
-              style: AppFontStyle.lightTitle,
-            ),
-          ),
+          viewTitle
+              ? Padding(
+                  padding: EdgeInsets.only(left: deviceInfo.width * 0.05),
+                  child: Text(
+                    'Gêneros',
+                    style: AppFontStyle.lightTitle,
+                  ),
+                )
+              : SizedBox(),
           SizedBox(
             height: deviceInfo.height * 0.08,
             child: ListView.builder(
