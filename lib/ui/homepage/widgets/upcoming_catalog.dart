@@ -17,7 +17,7 @@ class UpcomingCatalog extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.only(
             left: deviceInfo.height * 0.02, right: deviceInfo.height * 0.02),
-        height: deviceInfo.height * 0.68,
+        height: deviceInfo.height * 0.6,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,

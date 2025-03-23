@@ -17,6 +17,7 @@ class MovieController extends ChangeNotifier {
 
   MovieController() {
     fetchUpcoming();
+    
   }
 
   Future<void> fetchUpcoming() async {
