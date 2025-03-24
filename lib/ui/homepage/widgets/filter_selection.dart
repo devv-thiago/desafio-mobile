@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/data/controllers/filter_controller.dart';
 import 'package:movie_app/domain/models/e_filter.dart';
 import 'package:movie_app/ui/core/colors.dart';
 import 'package:movie_app/ui/core/fonts.dart';
+import 'package:provider/provider.dart';
 
-class MovieFilterSelector extends StatefulWidget {
+class MovieFilterSelector extends StatelessWidget {
   const MovieFilterSelector({super.key});
-
-
-  @override
-  _MovieFilterSelectorState createState() => _MovieFilterSelectorState();
-}
-
-class _MovieFilterSelectorState extends State<MovieFilterSelector> {
-  Set<MovieFilter> selectedFilter = {MovieFilter.upcoming};
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +14,9 @@ class _MovieFilterSelectorState extends State<MovieFilterSelector> {
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
           if (states.contains(WidgetState.selected)) {
-            return AppColors.color2; // Cor de fundo ao selecionar
+            return AppColors.color2;
           }
-           // Cor de fundo padrão
+          return AppColors.background;
         }),
         side: WidgetStateProperty.all(BorderSide(color: AppColors.color1)),
       ),
@@ -42,11 +36,9 @@ class _MovieFilterSelectorState extends State<MovieFilterSelector> {
           value: MovieFilter.popular,
         ),
       ],
-      selected: selectedFilter,
+      selected: context.watch<FilterController>().movieFilter,
       onSelectionChanged: (newSelection) {
-        setState(() {
-          selectedFilter = newSelection;
-        });
+        context.read<FilterController>().changeFilter(newSelection);
       },
     );
   }
