@@ -26,6 +26,27 @@ class MovieService {
       throw Exception('Erro getUpcomingMovies: $e');
     }
   }
+  Future<Catalog> getPopularMovies() async {
+    try {
+      http.Response response = await http.get(
+          Uri.parse(
+              'https://api.themoviedb.org/3/movie/popular?language=pt-BR'),
+          headers: {
+            "accept": "application/json",
+            "Authorization": "Bearer ${dotenv.env['API_KEY']}"
+          });
+      final Map<String, dynamic> json = jsonDecode(response.body);
+      return Catalog(
+          json['page'],
+          (json['results'] as List)
+              .map((movie) => Movie.fromJson(movie))
+              .toList());
+    } catch (e) {
+      throw Exception('Erro getUpcomingMovies: $e');
+    }
+  }
+
+
 
   Future<Cast> getCast(int movieId) async {
     try {

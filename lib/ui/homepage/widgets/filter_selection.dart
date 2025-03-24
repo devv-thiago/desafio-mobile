@@ -11,6 +11,7 @@ class MovieFilterSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SegmentedButton<MovieFilter>(
+      showSelectedIcon: false,
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
           if (states.contains(WidgetState.selected)) {

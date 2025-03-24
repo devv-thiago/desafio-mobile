@@ -5,19 +5,21 @@ import 'package:movie_app/domain/models/catalog.dart';
 
 class MovieController extends ChangeNotifier {
   final MovieService _movieService = MovieService();
-  Catalog _catalog = Catalog(1, []);
+  Catalog _upcomingCatalog = Catalog(1, []);
+  Catalog _popularCatalog = Catalog(1, []);
   Cast _cast = Cast(movieCast: []);
   bool _isLoading = true;
   String _errorMessage = '';
 
-  Catalog get catalog => _catalog;
+  Catalog get upcomingCatalog => _upcomingCatalog;
+  Catalog get popularCatalog => _popularCatalog;
   Cast get cast => _cast;
   bool get isLoading => _isLoading;
   String get errorMessage => _errorMessage;
 
   MovieController() {
     fetchUpcoming();
-    
+    fetchPopular();
   }
 
   Future<void> fetchUpcoming() async {
@@ -25,11 +27,27 @@ class MovieController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _catalog = await _movieService.getUpcomingMovies();
+      _upcomingCatalog = await _movieService.getUpcomingMovies();
     } catch (e) {
       _errorMessage =
           'Erro interno do aplicativo, contate a equipe de suporte!';
-          throw Exception('Erro fetchUpcoming: $e');
+      throw Exception('Erro fetchUpcoming: $e');
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> fetchPopular() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _popularCatalog = await _movieService.getPopularMovies();
+    } catch (e) {
+      _errorMessage =
+          'Erro interno do aplicativo, contate a equipe de suporte!';
+      throw Exception('Erro fetchPopular: $e');
     }
 
     _isLoading = false;

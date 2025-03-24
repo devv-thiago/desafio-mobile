@@ -18,7 +18,7 @@ class GenresList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: deviceInfo.height * 0.15,
+      height: deviceInfo.height * 0.14,
       child: Column(
         spacing: deviceInfo.height * 0.01,
         crossAxisAlignment: CrossAxisAlignment.start,

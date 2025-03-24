@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/domain/models/catalog.dart';
 import 'package:movie_app/ui/homepage/widgets/movie_miniature.dart';
 
-class UpcomingCatalog extends StatelessWidget {
+class MovieCatalog extends StatelessWidget {
   final Size deviceInfo;
   final Catalog catalog;
-  const UpcomingCatalog({
+  const MovieCatalog({
     required this.deviceInfo,
     required this.catalog,
     super.key,

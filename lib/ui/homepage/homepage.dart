@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/data/controllers/genre_controller.dart';
-import 'package:movie_app/data/controllers/movie_controller.dart';
 import 'package:movie_app/ui/core/colors.dart';
 import 'package:movie_app/ui/core/widgets/genre_list.dart';
 import 'package:movie_app/ui/homepage/widgets/filter_selection.dart';
-import 'package:movie_app/ui/homepage/widgets/upcoming_catalog.dart';
+import 'package:movie_app/ui/homepage/widgets/movies.dart';
+
 import 'package:provider/provider.dart';
 
 class Homepage extends StatelessWidget {
@@ -53,20 +53,7 @@ class Homepage extends StatelessWidget {
                         );
             }),
             MovieFilterSelector(),
-            Consumer<MovieController>(
-                builder: (context, movieController, child) {
-              return (movieController.isLoading &&
-                      movieController.catalog.movies.isEmpty)
-                  ? CircularProgressIndicator(color: AppColors.color2)
-                  : (movieController.errorMessage.isNotEmpty &&
-                          movieController.catalog.movies.isEmpty)
-                      ? Text(movieController.errorMessage,
-                          style: TextStyle(color: Colors.red))
-                      : UpcomingCatalog(
-                          deviceInfo: deviceInfo,
-                          catalog: movieController.catalog,
-                        );
-            }),
+            Movies(),
           ],
         ),
       ),
