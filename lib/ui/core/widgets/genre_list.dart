@@ -39,7 +39,7 @@ class GenresList extends StatelessWidget {
               itemCount: genres.length,
               itemBuilder: (context, index) => GenreButton(
                 deviceInfo: deviceInfo,
-                genreTitle: genres[index].name,
+                genre: genres[index],
               ),
             ),
           ),

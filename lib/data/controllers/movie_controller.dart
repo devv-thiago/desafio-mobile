@@ -54,6 +54,9 @@ class MovieController extends ChangeNotifier {
     notifyListeners();
   }
 
+
+
+
   Future<void> fetchMovieCast(int movieId) async {
     _isLoading = true;
     notifyListeners();
