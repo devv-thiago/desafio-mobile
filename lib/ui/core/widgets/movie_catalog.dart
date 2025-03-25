@@ -17,7 +17,7 @@ class MovieCatalog extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.only(
             left: deviceInfo.height * 0.02, right: deviceInfo.height * 0.02),
-        height: deviceInfo.height * 0.6,
+        height: deviceInfo.height * 0.63,
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
