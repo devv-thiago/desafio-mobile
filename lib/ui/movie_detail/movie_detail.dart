@@ -6,7 +6,7 @@ import 'package:movie_app/data/controllers/movie_controller.dart';
 import 'package:movie_app/domain/models/movie.dart';
 import 'package:movie_app/ui/core/colors.dart';
 import 'package:movie_app/ui/core/fonts.dart';
-import 'package:movie_app/ui/core/widgets/genre_list.dart';
+import 'package:movie_app/ui/homepage/widgets/genre_list.dart';
 import 'package:movie_app/ui/movie_detail/widgets/cast_list.dart';
 import 'package:provider/provider.dart';
 

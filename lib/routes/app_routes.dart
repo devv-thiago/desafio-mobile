@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:movie_app/domain/models/genre.dart';
 import 'package:movie_app/domain/models/movie.dart';
-import 'package:movie_app/ui/core/genre_movies/genre_movies.dart';
+import 'package:movie_app/ui/genre_movies/genre_movies.dart';
 import 'package:movie_app/ui/homepage/homepage.dart';
 import 'package:movie_app/ui/movie_detail/movie_detail.dart';
 

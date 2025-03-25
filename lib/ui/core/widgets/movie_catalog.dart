@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/models/catalog.dart';
-import 'package:movie_app/ui/homepage/widgets/movie_miniature.dart';
+import 'package:movie_app/ui/core/widgets/movie_miniature.dart';
 
 class MovieCatalog extends StatelessWidget {
   final Size deviceInfo;

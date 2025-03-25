@@ -3,7 +3,7 @@ import 'package:movie_app/data/controllers/genre_controller.dart';
 import 'package:movie_app/domain/models/genre.dart';
 import 'package:movie_app/ui/core/colors.dart';
 import 'package:movie_app/ui/core/fonts.dart';
-import 'package:movie_app/ui/homepage/widgets/movie_miniature.dart';
+import 'package:movie_app/ui/core/widgets/movie_miniature.dart';
 
 class GenreMovies extends StatelessWidget {
   final Genre genre;

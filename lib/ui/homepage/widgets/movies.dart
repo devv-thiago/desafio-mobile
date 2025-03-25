@@ -3,7 +3,7 @@ import 'package:movie_app/data/controllers/filter_controller.dart';
 import 'package:movie_app/data/controllers/movie_controller.dart';
 import 'package:movie_app/domain/models/e_filter.dart';
 import 'package:movie_app/ui/core/colors.dart';
-import 'package:movie_app/ui/homepage/widgets/movie_catalog.dart';
+import 'package:movie_app/ui/core/widgets/movie_catalog.dart';
 import 'package:provider/provider.dart';
 
 class Movies extends StatelessWidget {

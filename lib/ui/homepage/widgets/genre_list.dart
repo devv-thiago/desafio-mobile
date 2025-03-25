@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/domain/models/genre.dart';
 import 'package:movie_app/ui/core/fonts.dart';
-import 'package:movie_app/ui/core/widgets/genre_button.dart';
+import 'package:movie_app/ui/homepage/widgets/genre_button.dart';
 
 class GenresList extends StatelessWidget {
   final bool viewTitle;
