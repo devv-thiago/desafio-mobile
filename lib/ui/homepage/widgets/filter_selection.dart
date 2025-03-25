@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/data/controllers/filter_controller.dart';
-import 'package:movie_app/domain/models/e_filter.dart';
+import 'package:movie_app/domain/enum/enum_filter.dart';
 import 'package:movie_app/ui/core/colors.dart';
 import 'package:movie_app/ui/core/fonts.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ class MovieFilterSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SegmentedButton<MovieFilter>(
+    return SegmentedButton<EnumMovieFilter>(
       showSelectedIcon: false,
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
@@ -27,14 +27,14 @@ class MovieFilterSelector extends StatelessWidget {
             'Upcoming',
             style: AppFontStyle.lightMedium,
           ),
-          value: MovieFilter.upcoming,
+          value: EnumMovieFilter.upcoming,
         ),
         ButtonSegment(
           label: Text(
             'Popular',
             style: AppFontStyle.lightMedium,
           ),
-          value: MovieFilter.popular,
+          value: EnumMovieFilter.popular,
         ),
       ],
       selected: context.watch<FilterController>().movieFilter,

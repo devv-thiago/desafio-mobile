@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/data/controllers/filter_controller.dart';
 import 'package:movie_app/data/controllers/movie_controller.dart';
-import 'package:movie_app/domain/models/e_filter.dart';
+import 'package:movie_app/domain/enum/enum_filter.dart';
 import 'package:movie_app/ui/core/colors.dart';
 import 'package:movie_app/ui/core/widgets/movie_catalog.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +13,7 @@ class Movies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size deviceInfo = MediaQuery.of(context).size;
-    return (context.watch<FilterController>().movieFilter.contains(MovieFilter.upcoming)) ? Consumer<MovieController>(
+    return (context.watch<FilterController>().movieFilter.contains(EnumMovieFilter.upcoming)) ? Consumer<MovieController>(
                 builder: (context, movieController, child) {
               return (movieController.isLoading &&
                       movieController.upcomingCatalog.movies.isEmpty)

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/domain/models/e_filter.dart';
+import 'package:movie_app/domain/enum/enum_filter.dart';
 
 class FilterController extends ChangeNotifier {
-  Set<MovieFilter> _movieFilter = {MovieFilter.upcoming};
+  Set<EnumMovieFilter> _movieFilter = {EnumMovieFilter.upcoming};
 
-  Set<MovieFilter> get movieFilter => _movieFilter;
+  Set<EnumMovieFilter> get movieFilter => _movieFilter;
 
-  void changeFilter(Set<MovieFilter> newFilter) {
+  void changeFilter(Set<EnumMovieFilter> newFilter) {
     _movieFilter = newFilter;
     notifyListeners();
   }

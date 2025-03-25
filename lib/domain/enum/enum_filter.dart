@@ -1,4 +1,4 @@
-enum MovieFilter {
+enum EnumMovieFilter {
   upcoming,
   popular,
 }
