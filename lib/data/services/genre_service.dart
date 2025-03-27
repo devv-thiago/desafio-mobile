@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'package:movie_app/domain/models/catalog.dart';
@@ -15,6 +16,9 @@ class GenreService {
             "Authorization": "Bearer ${dotenv.env['API_KEY']}"
           });
       final Map<String, dynamic> json = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw HttpException('Http error getGenres: ${response.statusCode}');
+      }
       return (json['genres'] as List)
           .map((genre) => Genre.fromJson(genre))
           .toList();
@@ -33,6 +37,9 @@ class GenreService {
             "Authorization": "Bearer ${dotenv.env['API_KEY']}"
           });
       final Map<String, dynamic> json = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw HttpException('Http error getGenres: ${response.statusCode}');
+      }
       return Catalog(
           json['page'],
           (json['results'] as List)
@@ -42,5 +49,4 @@ class GenreService {
       throw Exception('Erro getUpcomingMovies: $e');
     }
   }
-
 }

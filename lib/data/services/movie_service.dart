@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:movie_app/domain/models/cast.dart';
@@ -17,6 +18,9 @@ class MovieService {
             "Authorization": "Bearer ${dotenv.env['API_KEY']}"
           });
       final Map<String, dynamic> json = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw HttpException('Http error getGenres: ${response.statusCode}');
+      }
       return Catalog(
           json['page'],
           (json['results'] as List)
@@ -26,6 +30,7 @@ class MovieService {
       throw Exception('Erro getUpcomingMovies: $e');
     }
   }
+
   Future<Catalog> getPopularMovies() async {
     try {
       http.Response response = await http.get(
@@ -36,6 +41,9 @@ class MovieService {
             "Authorization": "Bearer ${dotenv.env['API_KEY']}"
           });
       final Map<String, dynamic> json = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw HttpException('Http error getGenres: ${response.statusCode}');
+      }
       return Catalog(
           json['page'],
           (json['results'] as List)
@@ -46,8 +54,6 @@ class MovieService {
     }
   }
 
-
-
   Future<Cast> getCast(int movieId) async {
     try {
       http.Response response = await http.get(
@@ -57,15 +63,16 @@ class MovieService {
             "Authorization": "Bearer ${dotenv.env['API_KEY']}"
           });
       final Map<String, dynamic> json = jsonDecode(response.body);
+      if (response.statusCode != 200) {
+        throw HttpException('Http error getGenres: ${response.statusCode}');
+      }
       Cast noFilteredCast = Cast(
           movieCast: (json['cast'] as List)
               .map((person) => Person.fromJson(person))
               .toList());
       return Cast(
         movieCast: noFilteredCast.movieCast
-            .where((e) =>
-               
-                e.profile != dotenv.env['BACKDROP_BASEURL'])
+            .where((e) => e.profile != dotenv.env['BACKDROP_BASEURL'])
             .toList(),
       );
     } catch (e) {
